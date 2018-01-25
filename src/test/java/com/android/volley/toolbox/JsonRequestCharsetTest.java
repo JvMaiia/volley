@@ -57,7 +57,7 @@ public class JsonRequestCharsetTest {
         // UTF-8 is default charset for JSON
         byte[] data = jsonObjectString().getBytes(Charset.forName("UTF-8"));
         NetworkResponse network = new NetworkResponse(data);
-        JsonObjectRequest objectRequest = new JsonObjectRequest("", null, null, null);
+        JsonObjectRequest objectRequest = new JsonObjectRequest("", null, null, null, null);
         Response<JSONObject> objectResponse = objectRequest.parseNetworkResponse(network);
 
         assertNotNull(objectResponse);
@@ -70,7 +70,7 @@ public class JsonRequestCharsetTest {
         // UTF-8 is default charset for JSON
         byte[] data = jsonArrayString().getBytes(Charset.forName("UTF-8"));
         NetworkResponse network = new NetworkResponse(data);
-        JsonArrayRequest arrayRequest = new JsonArrayRequest("", null, null);
+        JsonArrayRequest arrayRequest = new JsonArrayRequest("", null, null, null);
         Response<JSONArray> arrayResponse = arrayRequest.parseNetworkResponse(network);
 
         assertNotNull(arrayResponse);
@@ -84,7 +84,7 @@ public class JsonRequestCharsetTest {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json; charset=iso-8859-1");
         NetworkResponse network = new NetworkResponse(data, headers);
-        JsonObjectRequest objectRequest = new JsonObjectRequest("", null, null, null);
+        JsonObjectRequest objectRequest = new JsonObjectRequest("", null, null, null, null);
         Response<JSONObject> objectResponse = objectRequest.parseNetworkResponse(network);
 
         assertNotNull(objectResponse);
@@ -98,7 +98,7 @@ public class JsonRequestCharsetTest {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json; charset=iso-8859-2");
         NetworkResponse network = new NetworkResponse(data, headers);
-        JsonArrayRequest arrayRequest = new JsonArrayRequest("", null, null);
+        JsonArrayRequest arrayRequest = new JsonArrayRequest("", null, null, null);
         Response<JSONArray> arrayResponse = arrayRequest.parseNetworkResponse(network);
 
         assertNotNull(arrayResponse);

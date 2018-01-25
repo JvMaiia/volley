@@ -27,6 +27,8 @@ import org.json.JSONException;
 
 import java.io.UnsupportedEncodingException;
 
+import java.util.HashMap;
+
 /**
  * A request for retrieving a {@link JSONArray} response body at a given URL.
  */
@@ -38,8 +40,8 @@ public class JsonArrayRequest extends JsonRequest<JSONArray> {
      * @param listener Listener to receive the JSON response
      * @param errorListener Error listener, or null to ignore errors.
      */
-    public JsonArrayRequest(String url, Listener<JSONArray> listener, ErrorListener errorListener) {
-        super(Method.GET, url, null, listener, errorListener);
+    public JsonArrayRequest(String url, Listener<JSONArray> listener, ErrorListener errorListener, HashMap<String, String> headers) {
+        super(Method.GET, url, null, listener, errorListener, headers);
     }
 
     /**
@@ -52,9 +54,9 @@ public class JsonArrayRequest extends JsonRequest<JSONArray> {
      * @param errorListener Error listener, or null to ignore errors.
      */
     public JsonArrayRequest(int method, String url, JSONArray jsonRequest,
-                            Listener<JSONArray> listener, ErrorListener errorListener) {
+                            Listener<JSONArray> listener, ErrorListener errorListener, HashMap<String, String> headers) {
         super(method, url, (jsonRequest == null) ? null : jsonRequest.toString(), listener,
-                errorListener);
+                errorListener, headers);
     }
 
     @Override

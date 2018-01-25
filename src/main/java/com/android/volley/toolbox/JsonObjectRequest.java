@@ -27,6 +27,8 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
+import java.util.HashMap;
+
 /**
  * A request for retrieving a {@link JSONObject} response body at a given URL, allowing for an
  * optional {@link JSONObject} to be passed in as part of the request body.
@@ -43,9 +45,9 @@ public class JsonObjectRequest extends JsonRequest<JSONObject> {
      * @param errorListener Error listener, or null to ignore errors.
      */
     public JsonObjectRequest(int method, String url, JSONObject jsonRequest,
-            Listener<JSONObject> listener, ErrorListener errorListener) {
+            Listener<JSONObject> listener, ErrorListener errorListener, HashMap<String, String> headers) {
         super(method, url, (jsonRequest == null) ? null : jsonRequest.toString(), listener,
-                    errorListener);
+                    errorListener, headers);
     }
 
     /**
@@ -55,9 +57,9 @@ public class JsonObjectRequest extends JsonRequest<JSONObject> {
      * @see #JsonObjectRequest(int, String, JSONObject, Listener, ErrorListener)
      */
     public JsonObjectRequest(String url, JSONObject jsonRequest, Listener<JSONObject> listener,
-            ErrorListener errorListener) {
+            ErrorListener errorListener, HashMap<String, String> headers) {
         this(jsonRequest == null ? Method.GET : Method.POST, url, jsonRequest,
-                listener, errorListener);
+                listener, errorListener, headers);
     }
 
     @Override

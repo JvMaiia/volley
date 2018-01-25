@@ -22,8 +22,11 @@ import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyLog;
+import com.android.volley.AuthFailureError;
 
 import java.io.UnsupportedEncodingException;
+
+import java.util.HashMap;
 
 /**
  * A request for retrieving a T type response body at a given URL that also
@@ -46,6 +49,8 @@ public abstract class JsonRequest<T> extends Request<T> {
     private Listener<T> mListener;
     private final String mRequestBody;
 
+    private HashMap<String, String> mHeaders;
+
     /**
      * Deprecated constructor for a JsonRequest which defaults to GET unless {@link #getPostBody()}
      * or {@link #getPostParams()} is overridden (which defaults to POST).
@@ -54,15 +59,16 @@ public abstract class JsonRequest<T> extends Request<T> {
      */
     @Deprecated
     public JsonRequest(String url, String requestBody, Listener<T> listener,
-            ErrorListener errorListener) {
-        this(Method.DEPRECATED_GET_OR_POST, url, requestBody, listener, errorListener);
+            ErrorListener errorListener, HashMap<String, String> headers) {
+        this(Method.DEPRECATED_GET_OR_POST, url, requestBody, listener, errorListener, headers);
     }
 
     public JsonRequest(int method, String url, String requestBody, Listener<T> listener,
-            ErrorListener errorListener) {
+            ErrorListener errorListener, HashMap<String, String> headers) {
         super(method, url, errorListener);
         mListener = listener;
         mRequestBody = requestBody;
+        mHeaders = headers;
     }
 
     @Override
@@ -119,5 +125,10 @@ public abstract class JsonRequest<T> extends Request<T> {
                     mRequestBody, PROTOCOL_CHARSET);
             return null;
         }
+    }
+
+    @Override
+    public HashMap<String, String> getHeaders() throws AuthFailureError {
+        return mHeaders;
     }
 }
