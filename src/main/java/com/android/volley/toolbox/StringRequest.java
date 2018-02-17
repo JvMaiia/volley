@@ -45,6 +45,7 @@ public class StringRequest extends Request<String> {
      * @param url URL to fetch the string at
      * @param listener Listener to receive the String response
      * @param errorListener Error listener, or null to ignore errors
+     * @param headers HashMap<String, String>
      */
     public StringRequest(int method, String url, Listener<String> listener,
             ErrorListener errorListener, HashMap<String, String> headers) {
@@ -59,9 +60,21 @@ public class StringRequest extends Request<String> {
      * @param url URL to fetch the string at
      * @param listener Listener to receive the String response
      * @param errorListener Error listener, or null to ignore errors
+     * @param headers HashMap<String, String>
      */
     public StringRequest(String url, Listener<String> listener, ErrorListener errorListener, HashMap<String, String> headers) {
         this(Method.GET, url, listener, errorListener, headers);
+    }
+
+    /**
+     * Creates a new GET request.
+     *
+     * @param url URL to fetch the string at
+     * @param listener Listener to receive the String response
+     * @param errorListener Error listener, or null to ignore errors
+     */
+    public StringRequest(String url, Listener<String> listener, ErrorListener errorListener) {
+        this(Method.GET, url, listener, errorListener, new HashMap<String, String>());
     }
 
     @Override
